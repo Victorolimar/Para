@@ -13,6 +13,8 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import ListViajes from "./pages/listViajes/ListViajes";
 import Stadistic from "./pages/statistics/statistics";
+import Driver from './components/newdrivers/driver'; 
+
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -40,6 +42,8 @@ function App() {
                 element={<New inputs={productInputs} title="Add New Product" />}
               />
             </Route>
+            <Route path="/users/new" element={<Driver />} />
+
             <Route path="viajes">
               <Route index element={<ListViajes />} />
             </Route>
