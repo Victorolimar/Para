@@ -7,6 +7,8 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import { read, utils, writeFile, writeFileXLSX } from 'xlsx';
 import { useCallback } from 'react';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -72,8 +74,52 @@ const Datatable = () => {
   }, []);
  
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+  const handleDelete = async (id) => {
+    // Mostrar ventana de confirmación
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¡No podrás deshacer esto!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, borrarlo'
+    });
+  
+    // Si se confirma la eliminación
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(`http://34.234.66.51/api/v1/driver/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+  
+        // Eliminar el elemento del estado
+        setData((prevData) => prevData.filter((item) => item.id !== id));
+  
+        // Mostrar mensaje de éxito
+        await Swal.fire(
+          '¡Eliminado!',
+          'El elemento ha sido eliminado.',
+          'success'
+        );
+      } catch (error) {
+        console.error('Error deleting client:', error);
+  
+        // Mostrar mensaje de error
+        await Swal.fire(
+          'Error',
+          'Hubo un problema al eliminar el elemento.',
+          'error'
+        );
+      }
+    }
   };
 
   const exportarDriver = useCallback(() => {

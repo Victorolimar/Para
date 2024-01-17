@@ -64,10 +64,7 @@ const SingleOperador = () => {
           </div>
         </div>
         </div>
-        <div className="bottom">
-        <h1 className="title">Historial de viajes</h1>
-          <List/>
-        </div>
+        
       </div>
     </div>
   );
