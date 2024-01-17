@@ -6,6 +6,7 @@ import Single from "./pages/single/Single";
 import SingleOperador from "./pages/singleOperador/SingleOperador";
 import New from "./pages/new/New";
 
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
@@ -13,19 +14,25 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import ListViajes from "./pages/listViajes/ListViajes";
 import Stadistic from "./pages/statistics/statistics";
-import Driver from './components/newdrivers/driver'; 
+import Driver from './components/newdrivers/driver';
 
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
-
+  
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
+            
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
+
+            <Route path="Home">
+              <Route index element={<Home />} />
+            </Route>
+            
             <Route path="clientes">
               <Route index element={<List />} />
               <Route path=":clienteId" element={<Single />} />

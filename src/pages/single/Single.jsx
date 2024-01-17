@@ -4,6 +4,8 @@ import Navbar from "../../components/navbar/Navbar";
 import { useParams, useLocation } from "react-router-dom";
 import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
+import Datatable from "../../components/datatableViajes/Datatable";
+
 const Single = () => {
   const { state } = useLocation();
 
@@ -32,6 +34,9 @@ const Single = () => {
                   <span className="itemKey">Celular: </span>
                   <span className="itemValue">{state?.numero}</span>
                 </div>
+                
+
+
                 <div className="detailItem">
                   {/* ...otros detalles */}
                 </div>
@@ -42,11 +47,7 @@ const Single = () => {
             {/*<Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />*/}
           </div>
         </div>
-        <div className="bottom">
-          <h1 className="title">Historial de viajes</h1>
-          <List/>
-
-        </div>
+        
       </div>
     </div>
   );

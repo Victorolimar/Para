@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./driver.scss";
 
-
 const Driver = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -25,16 +24,38 @@ const Driver = () => {
     password: "",
   });
 
+  
+
+  
+
+  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    
     setFormData((prevData) => ({
       ...prevData,
+      profile_picture: { ...prevData.profile_picture, url: name === "profile_picture" ? value : prevData.profile_picture.url },
       [name]: value,
     }));
   };
+  
+
+  
+  
+  
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formattedData = {
+      ...formData,
+      profile_picture: {
+        url: formData.profile_picture.url,
+        public_id: "",
+      },
+    };
 
     try {
       const response = await fetch("http://34.234.66.51/api/v1/driver", {
@@ -42,7 +63,7 @@ const Driver = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formattedData),
       });
 
       const data = await response.json();
@@ -54,7 +75,7 @@ const Driver = () => {
   };
 
   return (
-    <div className="driver-container"> 
+    <div className="driver-container">
       <h1>Crear un conductor</h1>
       <form onSubmit={handleSubmit}>
         <label>

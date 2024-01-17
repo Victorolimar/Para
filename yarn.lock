@@ -10012,6 +10012,7 @@ __metadata:
     recharts: "npm:^2.10.3"
     sass: "npm:^1.49.9"
     schema-utils: "npm:^4.2.0"
+    sweetalert2: "npm:^11.10.3"
     web-vitals: "npm:^2.1.4"
     xlsx: "npm:^0.18.5"
     yarn: "npm:^1.22.21"
@@ -13906,6 +13907,13 @@ __metadata:
   bin:
     svgo: bin/svgo
   checksum: 0741f5d5cad63111a90a0ce7a1a5a9013f6d293e871b75efe39addb57f29a263e45294e485a4d2ff9cc260a5d142c8b5937b2234b4ef05efdd2706fb2d360ecc
+  languageName: node
+  linkType: hard
+
+"sweetalert2@npm:^11.10.3":
+  version: 11.10.3
+  resolution: "sweetalert2@npm:11.10.3"
+  checksum: a9f63c6c32cc344e0ec3bea91e5ff34e874a1178cc25cfc66f41226622ba2c48fe64c563503ab0de1d1abe63f1a07897890f17807e07df0e07f5ca919b4d5fd7
   languageName: node
   linkType: hard
 

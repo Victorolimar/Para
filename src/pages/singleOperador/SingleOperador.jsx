@@ -5,6 +5,8 @@ import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
 import { useParams, useLocation } from "react-router-dom";
+import Datatable from "../../components/datatableViajes/Datatable"
+import "./operador.scss";
 
 
 const SingleOperador = () => {
@@ -27,6 +29,8 @@ const SingleOperador = () => {
               />
               <div className="details">
                 <h1 className="itemTitle">{state?.nombre}</h1>
+                <h1 className="itemTitle">{state?.apellidos}</h1>
+                
                 <div className="detailItem">
                   <span className="itemKey">Correo :</span>
                   <span className="itemValue">{state?.correo}</span>
@@ -41,6 +45,19 @@ const SingleOperador = () => {
                   {state?.direccion}
                   </span>
                 </div>
+                <div className="detailItem">
+                  <span className="itemKey">Número de teléfono:</span>
+                  <span className="itemValue">
+                  {state?.numero}
+                  </span>
+                </div>
+                <div className="detailItem">
+                  <span className="itemKey">Calificación:</span>
+                  <span className="itemValue">
+                  {state?.calificacion}
+                  </span>
+                </div>
+                
                 
               </div>
             </div>
@@ -49,25 +66,22 @@ const SingleOperador = () => {
           <div id="miSeccion" class="singleContainer">
           <h1 className="title">Datos del Vehiculo</h1>
           <div className="details">
-                <h1 className="itemTitle">Detalle</h1>
+                <h1 className="itemTitle">Detalles</h1>
                 <div className="detailItem">
-                  <span className="itemKey">Placa:</span>
+                  <span className="itemKey">Nûmero de Placa:</span>
                   <span className="itemValue">{state?.placa}</span>
                 </div>
                 <div className="detailItem">
-                  <span className="itemKey">Color:</span>
+                  <span className="itemKey">Color del Vehiculo:</span>
                   <span className="itemValue">{state?.color}</span>
                 </div>
+                
            </div>
-           <DriveEtaIcon className="icon" style={{color:'#722f37', fontSize: 40}}  />
-            {/*<Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />*/}
+           
           </div>
         </div>
         </div>
-        <div className="bottom">
-        <h1 className="title">Historial de viajes</h1>
-          <List/>
-        </div>
+        
       </div>
     </div>
   );

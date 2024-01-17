@@ -4,6 +4,8 @@ import { userColumns, userRows } from "../../datatablesource";
 import { Link, useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { read, utils, writeFile, writeFileXLSX } from 'xlsx';
+import Swal from 'sweetalert2';
+
 
 const Datatable = () => {
   const [data, setData] = useState(userRows);
@@ -44,21 +46,50 @@ const Datatable = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    try {
-      const response = await fetch(`http://34.234.66.51/api/v1/client/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+    // Mostrar ventana de confirmación
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¡No podrás deshacer esto!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, borrarlo'
+    });
+  
+    // Si se confirma la eliminación
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(`http://34.234.66.51/api/v1/client/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+  
+        // Eliminar el elemento del estado
+        setData((prevData) => prevData.filter((item) => item.id !== id));
+  
+        // Mostrar mensaje de éxito
+        await Swal.fire(
+          '¡Eliminado!',
+          'El cliente ha sido eliminado.',
+          'success'
+        );
+      } catch (error) {
+        console.error('Error deleting client:', error);
+  
+        // Mostrar mensaje de error
+        await Swal.fire(
+          'Error',
+          'Hubo un problema al eliminar el cliente.',
+          'error'
+        );
       }
-
-      setData((prevData) => prevData.filter((item) => item.id !== id));
-    } catch (error) {
-      console.error('Error deleting client:', error);
     }
   };
 

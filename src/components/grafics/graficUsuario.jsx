@@ -58,9 +58,9 @@ const GraficUsuario = () => {
   };
   
     return (
-        <div style={{ width: 400, height: 300 }}>
+        <div style={{ width: 400, height: 450 }}>
             <ResponsiveContainer>
-            <h2 style={{marginLeft:100}} >Total de clientes y conductores</h2>
+            <h2 style={{marginLeft:100}} >Total de clientes y conductores hoy</h2>
                 <PieChart width={400} height={400}>
                     <Pie dataKey="value" data={data} fill="#8884d8" label />
                     <Tooltip content={<CustomTooltip />} />
