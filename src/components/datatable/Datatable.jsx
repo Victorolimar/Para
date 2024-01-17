@@ -129,7 +129,7 @@ const Datatable = () => {
           <Link className="Exportar" onClick={exportUsers}>
             Exportar
           </Link>
-          <Link to="/users/new" className="link"></Link>
+          
         </div>
         <DataGrid
           className="datagrid"
