@@ -15,9 +15,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Aquí puedes realizar cualquier limpieza necesaria antes de cerrar sesión
-
-    // Luego redirige al usuario a la página de inicio de sesión
+    
     navigate("/login");
   };
 

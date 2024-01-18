@@ -33,9 +33,7 @@ const Navbar = () => {
       
             
           </div>
-          <div className="item">
-            <ListOutlinedIcon className="icon" />
-          </div>
+          
           <div className="item">
             <img
               src="https://laverdadnoticias.com/__export/1654914700714/sites/laverdad/img/2022/06/10/regularizacion_uman_mototaxis.jpg_554688468.jpg"

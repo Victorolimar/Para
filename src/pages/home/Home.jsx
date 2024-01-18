@@ -10,6 +10,7 @@ import HomeContain from "../../components/homeContainer/homeContain";
 const Home = () => {
   return (
     <div className="home">
+      
       <Sidebar />
       <div className="homeCon">
         <HomeContain/>

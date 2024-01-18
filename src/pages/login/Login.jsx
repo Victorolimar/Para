@@ -3,6 +3,7 @@ import "./login.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 // Importa tu imagen de logo aquí
 import logo from './icon.png';
@@ -14,13 +15,16 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const {dispatch} = useContext(AuthContext)
+
   const handleLogin = (e) => {
     e.preventDefault();
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        navigate("/");
+        dispatch({type:"LOGIN", payload:user})
+        navigate("/Home");
       })
       .catch((error) => {
         setError(true);
@@ -33,6 +37,7 @@ const Login = () => {
         <img src={logo} alt="Logo"className="logo-image" />
       </div>
       <form onSubmit={handleLogin}>
+        <p>Bienvenido, por favor ingrese su correo y contraseña:</p>
         <input
           type="email"
           placeholder="Correo electronico"

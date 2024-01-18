@@ -45,6 +45,8 @@ const Datatable = () => {
     fetchData();
   }, []);
 
+  
+
   const handleDelete = async (id) => {
     // Mostrar ventana de confirmación
     const result = await Swal.fire({
@@ -116,6 +118,8 @@ const Datatable = () => {
           <div className="deleteButton" onClick={() => handleDelete(params.row.id)}>
             Eliminar
           </div>
+          
+          
         </div>
       ),
     },
