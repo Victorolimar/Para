@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  parafront:
+    build: .
+    volumes:
+    - ./src:/app/src
+    ports:
+    - 80:3000
