@@ -44,7 +44,7 @@ const PasswordCliente = () => {
 
     try {
       const response = await fetch(
-        `http://34.234.66.51/api/v1/client/${clienteId}`,
+        `http://34.234.66.51/api/v1/client/0/${clienteId}`,
         {
           method: "PUT",
           headers: {

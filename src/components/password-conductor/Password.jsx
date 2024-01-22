@@ -43,7 +43,7 @@ const PasswordConductor = () => {
 
     try {
       const response = await fetch(
-        `http://34.234.66.51/api/v1/driver/${operadorId}`,
+        `http://34.234.66.51/api/v1/driver/0/${operadorId}`,
         {
           method: "PUT",
           headers: {
