@@ -106,16 +106,7 @@ const UpdateClient = () => {
           />
         </label>
 
-        <label>
-          Contraseña:
-          <input
-            type="text"
-            name="password"
-            value={formData.password}          
-            onChange={handleChange}
-            required
-          />
-        </label>
+        
 
         <button type="submit"
            disabled={
