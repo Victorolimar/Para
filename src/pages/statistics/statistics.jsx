@@ -5,6 +5,7 @@ import GraficUsuario from "../../components/grafics/graficUsuario"
 import PieType from "../../components/grafics/graficas"
 
 
+
 const Stadistic = () => {
   return (
     <div className="list">
@@ -19,8 +20,14 @@ const Stadistic = () => {
           <GraficUsuario/>
           </div>
 
+          
+
         </div>
       </div>
+
+      
+      
+    
     </div>
   )
 }

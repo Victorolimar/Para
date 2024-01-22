@@ -7,6 +7,7 @@ import { utils, writeFile } from 'xlsx';
 
 const Datatable = () => {
   const [data, setData] = useState([]);
+  const [totalViajes, setTotalViajes] = useState(0); // Nuevo estado para el total de viajes
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,6 +48,10 @@ const Datatable = () => {
         });
 
         console.log('API response:', list);
+
+        // Actualiza el total de viajes
+        setTotalViajes(list.length);
+
         setData(list);
       } catch (error) {
         console.error('Error fetching data from API:', error);
@@ -67,7 +72,8 @@ const Datatable = () => {
     <>
       <div className="datatable">
         <div className="datatableTitle">
-          Viajes Registrados
+          
+          <span>Total de Viajes registrados: {totalViajes}</span>
           <Link className="Exportar" onClick={exportViajes}>
             Exportar
           </Link>

@@ -3,12 +3,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../datatablesource";
 import { Link, useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
-import { read, utils, writeFile, writeFileXLSX } from 'xlsx';
 import Swal from 'sweetalert2';
-
+import { utils, writeFile } from 'xlsx';
 
 const Datatable = () => {
   const [data, setData] = useState(userRows);
+  const [totalClientes, setTotalClientes] = useState(0); // Nuevo estado para el total de clientes
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,6 +37,10 @@ const Datatable = () => {
         }));
 
         console.log('API response:', list);
+
+        // Actualiza el total de clientes
+        setTotalClientes(list.length);
+
         setData(list);
       } catch (error) {
         console.error('Error fetching data from API:', error);
@@ -46,10 +50,7 @@ const Datatable = () => {
     fetchData();
   }, []);
 
-  
-
   const handleDelete = async (id) => {
-    // Mostrar ventana de confirmación
     const result = await Swal.fire({
       title: '¿Estás seguro?',
       text: '¡No podrás deshacer esto!',
@@ -59,8 +60,7 @@ const Datatable = () => {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, borrarlo'
     });
-  
-    // Si se confirma la eliminación
+
     if (result.isConfirmed) {
       try {
         const response = await fetch(`http://34.234.66.51/api/v1/client/${id}`, {
@@ -69,14 +69,17 @@ const Datatable = () => {
             'Content-Type': 'application/json',
           },
         });
-  
+
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-  
+
         // Eliminar el elemento del estado
         setData((prevData) => prevData.filter((item) => item.id !== id));
-  
+
+        // Actualiza el total de clientes después de eliminar uno
+        setTotalClientes((prevTotal) => prevTotal - 1);
+
         // Mostrar mensaje de éxito
         await Swal.fire(
           '¡Eliminado!',
@@ -85,7 +88,7 @@ const Datatable = () => {
         );
       } catch (error) {
         console.error('Error deleting client:', error);
-  
+
         // Mostrar mensaje de error
         await Swal.fire(
           'Error',
@@ -99,9 +102,9 @@ const Datatable = () => {
   const exportUsers = useCallback(() => {
     const exuser = utils.json_to_sheet(data);
     const newU = utils.book_new();
-    utils.book_append_sheet(newU,exuser,"Usuarios")
-    writeFile(newU,"Usuarios.xlsx")
-  },[data])
+    utils.book_append_sheet(newU, exuser, "Usuarios");
+    writeFile(newU, "Usuarios.xlsx");
+  }, [data]);
 
   const actionColumn = [
     {
@@ -119,8 +122,6 @@ const Datatable = () => {
           <div className="deleteButton" onClick={() => handleDelete(params.row.id)}>
             Eliminar
           </div>
-          
-          
         </div>
       ),
     },
@@ -130,11 +131,11 @@ const Datatable = () => {
     <>
       <div className="datatable">
         <div className="datatableTitle">
-          Clientes Registrados
+          
+          <span>Clientes Registrados: {totalClientes}</span>
           <Link className="Exportar" onClick={exportUsers}>
             Exportar
           </Link>
-          
         </div>
         <DataGrid
           className="datagrid"

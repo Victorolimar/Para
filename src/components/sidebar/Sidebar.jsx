@@ -29,7 +29,7 @@ const Sidebar = () => {
       <hr />
       <div className="center">
         <ul>
-          <p className="title">MAIN</p>
+          <p className="title">PRINCIPAL</p>
 
           <Link to="/Estadistica" style={{ textDecoration: "none" }}>
             <li>
@@ -39,7 +39,7 @@ const Sidebar = () => {
           </Link>
 
 
-          <p className="title">LISTS</p>
+          <p className="title">LISTAS</p>
           <Link to="/clientes" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" style={{ color: "#722f37" }} />
@@ -58,7 +58,7 @@ const Sidebar = () => {
               <span>Viajes</span>
             </li>
           </Link>
-          <p className="title">USER</p>
+          <p className="title">USUARIO</p>
           <li onClick={() => setLogoutConfirmationOpen(true)}>
             <ExitToAppIcon className="icon" style={{ color: "#722f37" }} />
             <span>Cerrar sesión</span>
